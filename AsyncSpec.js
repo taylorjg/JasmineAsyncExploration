@@ -30,6 +30,12 @@
                 return flag;
             }, "loaded to be set", 1000);
 
+            runs(function() {
+                console.log("Entering runs fn");
+                expect(flag).toBe(true);
+                console.log("Leaving runs fn");
+            });
+
             console.log("Leaving 'getScript test'");
         });
 
@@ -63,6 +69,15 @@
                 }, "loaded to be set", 1000);
 
                 console.log("Leaving forEach fn - index: " + index);
+            });
+
+            runs(function() {
+                console.log("Entering runs fn");
+                expect(flags.length).toBe(7);
+                flags.forEach(function(flag){
+                    expect(flag).toBe(true);
+                });
+                console.log("Leaving runs fn");
             });
 
             console.log("Leaving 'multiple parallel waitsFor'");
@@ -109,6 +124,15 @@
 
             beginGetScript(0);
             waitForGetScript(0);
+
+            runs(function() {
+                console.log("Entering runs fn");
+                expect(flags.length).toBe(3);
+                flags.forEach(function(flag){
+                    expect(flag).toBe(true);
+                });
+                console.log("Leaving runs fn");
+            });
 
             console.log("Leaving 'multiple sequential waitsFor'");
         });
